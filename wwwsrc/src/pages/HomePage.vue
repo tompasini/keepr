@@ -1,0 +1,43 @@
+<template>
+  <div class="container-fluid home">
+    <div class="row">
+      <home-keep-component v-for="keep in keeps" :key="keep.id" :keep-prop="keep" />
+    </div>
+  </div>
+</template>
+
+<script>
+import { computed, onMounted } from 'vue'
+import { keepsService } from '../services/KeepsService'
+import HomeKeepComponent from '../components/HomeKeepComponent.vue'
+import { AppState } from '../AppState'
+// import { profileService } from '../services/ProfileService'
+export default {
+  components: { HomeKeepComponent },
+  name: 'Home',
+  setup() {
+    onMounted(async() => {
+      // if (!AppState.profile.id) {
+      //   await profileService.getProfile()
+      // }
+      await keepsService.getAllKeeps()
+      // await profileService.getVaultsByProfile(AppState.profile.id)
+    })
+    return {
+      keeps: computed(() => AppState.keeps)
+    }
+  }
+}
+
+</script>
+
+<style scoped lang="scss">
+.home{
+  text-align: center;
+  user-select: none;
+  > img{
+    height: 200px;
+    width: 200px;
+  }
+}
+</style>

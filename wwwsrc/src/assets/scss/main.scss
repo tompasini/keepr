@@ -1,0 +1,60 @@
+@import "./_variables.scss";
+@import "bootstrap";
+@import "./_transitions.scss";
+@import "./_overrides.scss";
+
+:root {
+  --grey: #f6f6f6;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: $body-bg;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+main {
+  flex-grow: 1;
+  display: flex;
+  align-items: stretch;
+}
+
+.image-box {
+  position: relative;
+  text-align: center;
+  color: black;
+}
+
+.bottom-left {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+}
+
+.bottom-right {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+}
+
+.top-left {
+  position: absolute;
+  top: 8px;
+  left: 16px;
+}
+
+.top-right {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+}
+
+.avatar{
+  max-width: 30px;
+  max-height: 30px;
+  min-width: 30px;
+  min-height: 30px;
+}
