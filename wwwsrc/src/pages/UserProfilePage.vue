@@ -140,6 +140,8 @@
           </div>
         </h3>
       </div>
+    </div>
+    <div class="card-columns">
       <home-keep-component v-for="keep in keeps" :key="keep.id" :keep-prop="keep" />
     </div>
   </div>

@@ -5,6 +5,8 @@
         <h1>{{ activeVault.name }}</h1>
         <h5>Keeps: {{ keeps.length }}</h5>
       </div>
+    </div>
+    <div class="card-columns">
       <home-keep-component v-for="keep in keeps" :key="keep.id" :keep-prop="keep" />
     </div>
   </div>

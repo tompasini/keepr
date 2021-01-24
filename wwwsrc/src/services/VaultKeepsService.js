@@ -2,6 +2,7 @@ import { api } from './AxiosService'
 // import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
 import { AppState } from '../AppState'
+import Swal from 'sweetalert2'
 
 class VaultKeepsService {
   async addKeepToVault(vId, kId) {
@@ -22,12 +23,46 @@ class VaultKeepsService {
   }
 
   async removeKeepFromVault(vaultKeepId, vaultId) {
-    try {
-      await api.delete('api/vaultkeeps/' + vaultKeepId)
-      this.getKeepsByVault(vaultId)
-    } catch (error) {
-      logger.error(error)
-    }
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+        try {
+          await api.delete('api/vaultkeeps/' + vaultKeepId)
+          this.getKeepsByVault(vaultId)
+        } catch (error) {
+          logger.error(error)
+        }
+        swalWithBootstrapButtons.fire(
+          'Deleted!',
+          'This keep has been removed from the vault',
+          'success'
+        )
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'The keep is still in the vault',
+          'error'
+        )
+      }
+    })
   }
 
   async getKeepsByVault(vaultId) {

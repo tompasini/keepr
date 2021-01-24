@@ -133,7 +133,7 @@
             </div>
           </div>
         </h3>
-        <div class="row">
+        <div class="card-columns">
           <home-keep-component v-for="keep in keeps" :key="keep.id" :keep-prop="keep" />
         </div>
       </div>

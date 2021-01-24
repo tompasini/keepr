@@ -1,6 +1,7 @@
 import { api } from './AxiosService'
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
+import Swal from 'sweetalert2'
 
 class KeepsService {
   // get methods
@@ -51,12 +52,46 @@ class KeepsService {
   }
 
   async deleteKeep(keepId) {
-    try {
-      await api.delete('api/keeps/' + keepId)
-      this.getProfileKeeps()
-    } catch (error) {
-      logger.log(error)
-    }
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+        try {
+          await api.delete('api/keeps/' + keepId)
+          this.getProfileKeeps()
+        } catch (error) {
+          logger.log(error)
+        }
+        swalWithBootstrapButtons.fire(
+          'Deleted!',
+          'Your keep has been deleted.',
+          'success'
+        )
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'Your keep is safe :)',
+          'error'
+        )
+      }
+    })
   }
 }
 
