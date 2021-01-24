@@ -154,6 +154,7 @@ import { vaultsService } from '../services/VaultsService'
 import { AppState } from '../AppState'
 import { keepsService } from '../services/KeepsService'
 import { profileService } from '../services/ProfileService'
+import $ from 'jquery'
 export default {
   name: 'UserProfile',
   setup() {
@@ -185,9 +186,11 @@ export default {
       userProfile: computed(() => AppState.userProfile),
       addKeep(newKeep) {
         keepsService.addKeep(newKeep)
+        $('#keepModal').modal('toggle')
       },
       addVault(newVault, profileId) {
         vaultsService.addVault(newVault, profileId)
+        $('#vaultModal').modal('toggle')
       }
     }
   },

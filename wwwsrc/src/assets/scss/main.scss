@@ -8,10 +8,11 @@
 }
 
 #app {
+  font-family: 'Fjalla One', sans-serif;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: $body-bg;
+  background-color: beige;
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
@@ -20,6 +21,10 @@ main {
   flex-grow: 1;
   display: flex;
   align-items: stretch;
+}
+
+.vault-bg{
+  background-color: rgb(185, 220, 231);
 }
 
 .image-box {

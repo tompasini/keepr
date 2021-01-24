@@ -29,7 +29,7 @@ namespace keepr.Controllers
       try
       {
         Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
-        return Ok(_vks.GetKeepsByVaultId(vaultId, userInfo.Id));
+        return Ok(_vks.GetKeepsByVaultId(vaultId, userInfo?.Id));
       }
       catch (System.Exception e)
       {

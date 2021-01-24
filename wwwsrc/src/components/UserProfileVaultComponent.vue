@@ -1,5 +1,5 @@
 <template>
-  <div @click.stop="goToActiveVault(vault.id)" class="userprofile-vault-component col-3 border rounded shadow-lg pointer">
+  <div @click.stop="goToActiveVault(vault.id)" class="userprofile-vault-component col-3 border rounded shadow-lg pointer vault-bg m-2">
     <h3>{{ vault.name }}</h3>
     <p>{{ vault.description }}</p>
     <button v-if="vault.creatorId == profile.id" @click.stop="deleteVault(vault.id, profile.id)" class="btn btn-danger">

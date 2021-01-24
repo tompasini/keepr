@@ -72,7 +72,8 @@ class KeepsService {
       if (result.isConfirmed) {
         try {
           await api.delete('api/keeps/' + keepId)
-          this.getProfileKeeps()
+          const keepIndex = AppState.keeps.findIndex(k => k.id === keepId)
+          AppState.keeps.splice(keepIndex, 1)
         } catch (error) {
           logger.log(error)
         }

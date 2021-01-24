@@ -1,5 +1,5 @@
 <template>
-  <div @click="getActiveKeep(keep.id)" class="home-keep-component card pointer" data-toggle="modal" :data-target="'#keepModal' + keep.id">
+  <div @click="getActiveKeep(keep.id)" class="home-keep-component card pointer shadow-sm my-3 mr-3" data-toggle="modal" :data-target="'#keepModal' + keep.id">
     <img class="card-img-top img-fluid" :src="keep.img" alt="keep img" style="width: 100%;">
     <div class="card-body">
       <h3>
@@ -57,7 +57,7 @@
                 {{ vault.name }}
               </button>
             </div>
-            <button v-if="keep.vaultKeepId && vault.creatorId == profile.id" @click.stop="removeKeepFromVault(keep.vaultKeepId, vault.id, profile.id)" class="btn btn-danger">
+            <button v-if="keep.vaultKeepId && vault.creatorId == profile.id" @click.stop="removeKeepFromVault(keep.vaultKeepId, vault.id, keep.id)" class="btn btn-danger">
               Remove from Vault
             </button>
           </div>
@@ -73,6 +73,7 @@ import { useRouter } from 'vue-router'
 import { AppState } from '../AppState'
 import { vaultKeepsService } from '../services/VaultKeepsService'
 import { keepsService } from '../services/KeepsService'
+import $ from 'jquery'
 export default {
   name: 'HomeKeepComponent',
   props: {
@@ -94,10 +95,11 @@ export default {
       },
       deleteKeep(keepId) {
         keepsService.deleteKeep(keepId)
+        $('#keepModal' + keepId).modal('toggle')
       },
-      async removeKeepFromVault(vaultKeepId, vaultId, profileId) {
-        await vaultKeepsService.removeKeepFromVault(vaultKeepId, vaultId)
-        // router.push({ name: 'UserProfile', params: { id: profileId } })
+      removeKeepFromVault(vaultKeepId, vaultId, keepId) {
+        vaultKeepsService.removeKeepFromVault(vaultKeepId, vaultId)
+        $('#keepModal' + keepId).modal('toggle')
       },
       getActiveKeep(keepId) {
         keepsService.getActiveKeep(keepId)

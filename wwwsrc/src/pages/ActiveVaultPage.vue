@@ -1,7 +1,7 @@
 <template>
-  <div class="activeVault container-fluid">
+  <div class="activeVault container-fluid p-0">
     <div class="row">
-      <div class="col-12">
+      <div class="col-12 ml-3">
         <h1>{{ activeVault.name }}</h1>
         <h5>Keeps: {{ keeps.length }}</h5>
       </div>
@@ -23,9 +23,9 @@ export default {
   name: 'ActiveVault',
   setup() {
     const route = useRoute()
-    onMounted(() => {
-      vaultsService.getActiveVault(route.params.id)
-      vaultKeepsService.getKeepsByVault(route.params.id)
+    onMounted(async() => {
+      await vaultsService.getActiveVault(route.params.id)
+      await vaultKeepsService.getKeepsByVault(route.params.id)
     })
     return {
       activeVault: computed(() => AppState.activeVault),
