@@ -11,17 +11,12 @@ import { computed, onMounted } from 'vue'
 import { keepsService } from '../services/KeepsService'
 import HomeKeepComponent from '../components/HomeKeepComponent.vue'
 import { AppState } from '../AppState'
-// import { profileService } from '../services/ProfileService'
 export default {
   components: { HomeKeepComponent },
   name: 'Home',
   setup() {
     onMounted(async() => {
-      // if (!AppState.profile.id) {
-      //   await profileService.getProfile()
-      // }
       await keepsService.getAllKeeps()
-      // await profileService.getVaultsByProfile(AppState.profile.id)
     })
     return {
       keeps: computed(() => AppState.keeps)
