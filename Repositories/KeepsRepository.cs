@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using Dapper;
+using keepr.Interfaces;
 using keepr.Models;
 
 namespace keepr.Repositories
 {
-  public class KeepsRepository
+  public class KeepsRepository : IKeepsRepository
   {
     private readonly IDbConnection _db;
 

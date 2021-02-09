@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using keepr.Interfaces;
 using keepr.Models;
 using keepr.Repositories;
 
@@ -8,12 +9,13 @@ namespace keepr.Services
 {
   public class KeepsService
   {
-    private readonly KeepsRepository _repo;
+    private readonly IKeepsRepository _repo;
 
-    public KeepsService(KeepsRepository repo)
+    public KeepsService(IKeepsRepository repo)
     {
       _repo = repo;
     }
+
 
     public Keep Create(Keep newKeep)
     {

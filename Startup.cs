@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using CodeWorks.Auth0Provider;
+using keepr.Interfaces;
 using keepr.Repositories;
 using keepr.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -68,7 +69,7 @@ namespace keepr
       services.AddTransient<ProfileService>();
       services.AddTransient<ProfileRepository>();
       services.AddTransient<KeepsService>();
-      services.AddTransient<KeepsRepository>();
+      services.AddTransient<IKeepsRepository, KeepsRepository>();
       services.AddTransient<VaultsService>();
       services.AddTransient<VaultsRepository>();
       services.AddTransient<VaultKeepsService>();

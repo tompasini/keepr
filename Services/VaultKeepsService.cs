@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using keepr.Interfaces;
 using keepr.Models;
 using keepr.Repositories;
 
@@ -11,9 +12,9 @@ namespace keepr.Services
     private readonly VaultKeepsRepository _repo;
     private readonly VaultsRepository _vaultrepo;
 
-    private readonly KeepsRepository _keeprepo;
+    private readonly IKeepsRepository _keeprepo;
 
-    public VaultKeepsService(VaultKeepsRepository repo, VaultsRepository vaultrepo, KeepsRepository keeprepo)
+    public VaultKeepsService(VaultKeepsRepository repo, VaultsRepository vaultrepo, IKeepsRepository keeprepo)
     {
       _repo = repo;
       _vaultrepo = vaultrepo;

@@ -22,7 +22,7 @@ namespace keepr.Services
     {
       if (profId != userId)
       {
-        return _repo.getVaultsByProfile(profId).ToList().FindAll(v => v.CreatorId == userId || v.IsPrivate == false);
+        return _repo.getVaultsByProfile(profId).ToList().FindAll(v => v.IsPrivate == false);
       }
       return _repo.getVaultsByProfile(profId).ToList().FindAll(v => v.CreatorId == userId || v.IsPrivate);
     }
