@@ -35,6 +35,7 @@ namespace keepr.Repositories
     public Keep GetById(int id)
     {
       Keep keep1 = new Keep();
+      keep1.CreatorId = "abc";
       return keep1;
     }
 
